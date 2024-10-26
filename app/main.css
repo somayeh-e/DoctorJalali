@@ -6,6 +6,11 @@
   font-display: swap;
 }
 
+/* our own changes */
+.text-white {
+  text-decoration: none !important;
+}
+
 body {
   font-family: "Vazirmatn" !important;
 }
