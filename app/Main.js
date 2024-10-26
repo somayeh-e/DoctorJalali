@@ -9,7 +9,7 @@ function Main() {
           <h4 className="my-0 mr-md-auto font-weight-normal">
             <a href="/" className="text-white">
               {" "}
-              برنامه اساتید دانشگاه قم{" "}
+              برنامه اساتید دانشگاه تهران{" "}
             </a>
           </h4>
           <form className="mb-0 pt-2 pt-md-0">
