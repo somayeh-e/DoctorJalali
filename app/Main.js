@@ -6,7 +6,7 @@ function Main() {
     <>
       <header className="header-bar bg-primary mb-3">
         <div className="container d-flex flex-column flex-md-row align-items-center p-3">
-          <img src={"images/QomUni.png"} />
+          <img className="logo" src="white-logo.png"></img>
           <h4 className="my-0 mr-md-auto font-weight-normal">
             <a href="/" className="text-white">
               {" "}
@@ -74,7 +74,7 @@ function Main() {
           </a>{" "}
           |{" "}
           <a className="mx-1" href="/terms">
-            Terms
+            قوانین
           </a>
         </p>
         <p className="m-0">
