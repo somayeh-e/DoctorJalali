@@ -22,6 +22,7 @@ function Header() {
               </div>
               <div className="col-md-auto">
                 <button className="btn btn-success btn-sm">ورود دانشجو</button>
+                <button className="btn btn-success btn-sm teacher-login">ورود استاد</button>
               </div>
             </div>
           </form>

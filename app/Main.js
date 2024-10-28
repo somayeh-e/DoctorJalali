@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
+import { Routes, Route } from "react-router-dom"
 
 // My components
 import Header from "./components/Header"
@@ -10,6 +11,9 @@ function Main() {
   return (
     <>
       <Header />
+      {/* <Routes>
+        <Route path="/" element={<HomeGuest />} />
+      </Routes> */}
       <HomeGuest />
       <Footer />
     </>
