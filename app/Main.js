@@ -1,21 +1,24 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 // My components
 import Header from "./components/Header"
 import HomeGuest from "./components/HomeGuest"
 import Footer from "./components/Footer"
+import RegisterTeacher from "./components/RegisterTeacher"
 
 function Main() {
   return (
     <>
-      <Header />
-      {/* <Routes>
-        <Route path="/" element={<HomeGuest />} />
-      </Routes> */}
-      <HomeGuest />
-      <Footer />
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomeGuest />} />
+          <Route path="/RegisterTeacher" element={<RegisterTeacher />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </>
   )
 }

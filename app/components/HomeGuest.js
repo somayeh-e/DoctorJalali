@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+import { Link } from "react-router-dom"
 
 function HomeGuest() {
   return (
@@ -12,17 +13,19 @@ function HomeGuest() {
           <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5 direction">
             <form>
               <div className="form-group">
-                <label for="username-register" className="text-muted mb-1">
-                  <small>نام و نام خانوادگی</small>
-                </label>
-                <input id="username-register" name="username" className="form-control" type="text" placeholder="یک نام کاربری انتخاب کنید" autocomplete="off" />
-              </div>
-              <div className="form-group">
                 <label for="email-register" className="text-muted mb-1">
                   <small>عکس پروفایل</small>
                 </label>
                 <input id="email-register" name="email" className="form-control" type="file" autocomplete="off" />
               </div>
+
+              <div className="form-group">
+                <label for="username-register" className="text-muted mb-1">
+                  <small>نام و نام خانوادگی</small>
+                </label>
+                <input id="username-register" name="username" className="form-control" type="text" placeholder="یک نام کاربری انتخاب کنید" autocomplete="off" />
+              </div>
+
               <div className="form-group">
                 <label for="password-register" className="text-muted mb-1">
                   <small>رمز عبور</small>
@@ -32,9 +35,9 @@ function HomeGuest() {
               <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
                 ثبت نام دانشجو
               </button>
-              <a className="teacher-submit" href="#">
+              <Link className="teacher-submit" to={"/RegisterTeacher"}>
                 اگر استاد هستید برای ثبت نام اینجا کلیک کنید
-              </a>
+              </Link>
             </form>
           </div>
         </div>
