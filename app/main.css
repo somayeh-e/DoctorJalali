@@ -5,7 +5,71 @@
   font-style: normal;
   font-display: swap;
 }
+/* colors
+#007bff
+#28a745
+*/
 
+/* our own changes */
+.direction,
+label small,
+form input {
+  direction: rtl;
+  text-align: right;
+}
+
+/* .teacher-form {
+  margin: auto;
+  position: absolute;
+  right: 0;
+} */
+
+.flex-input {
+  display: flex;
+  gap: 8px;
+}
+
+.option-width {
+  width: 50%;
+}
+
+option {
+  font-family: "Vazirmatn";
+}
+
+.margin-teacher-register {
+  margin-top: -80px;
+}
+
+.text-white {
+  text-decoration: none !important;
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+  margin-right: 15px;
+}
+
+.teacher-submit {
+  display: inline-block;
+  margin-top: 15px;
+  color: #000;
+  text-decoration: none;
+  position: absolute;
+  right: 15px;
+  transition: border-bottom 0.1s;
+}
+.teacher-submit:hover {
+  border-bottom: 3px solid #007bff;
+  text-decoration: none;
+  color: #000;
+}
+.teacher-login {
+  margin-left: 5px;
+}
+
+/* prev changes */
 body {
   font-family: "Vazirmatn" !important;
 }
