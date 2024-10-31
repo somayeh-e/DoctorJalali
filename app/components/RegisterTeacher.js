@@ -10,6 +10,12 @@ function RegisterTeacher() {
       <div className="container py-md-5 ">
         <form class="col-lg-6 offset-lg-3 direction">
           <div className="form-row">
+            <div className="form-group width-input">
+              <label for="email-register" className="text-muted mb-1">
+                <small>عکس پروفایل</small>
+              </label>
+              <input id="email-register" name="email" className="form-control" type="file" autocomplete="off" />
+            </div>
             <div className="form-group col-md-6">
               <label for="username-register" className="text-muted mb-1">
                 <small>نام و نام خانوادگی</small>

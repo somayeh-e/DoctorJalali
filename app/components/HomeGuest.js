@@ -23,14 +23,21 @@ function HomeGuest() {
                 <label for="username-register" className="text-muted mb-1">
                   <small>نام و نام خانوادگی</small>
                 </label>
-                <input id="username-register" name="username" className="form-control" type="text" placeholder="یک نام کاربری انتخاب کنید" autocomplete="off" />
+                <input id="username-register" name="username" className="form-control" type="text" autocomplete="off" />
+              </div>
+
+              <div className="form-group">
+                <label for="password-register" className="text-muted mb-1">
+                  <small>شماره دانشجویی</small>
+                </label>
+                <input id="password-register" name="password" className="form-control" type="password" placeholder="شماره دانشجویی خود را وارد کنید" />
               </div>
 
               <div className="form-group">
                 <label for="password-register" className="text-muted mb-1">
                   <small>رمز عبور</small>
                 </label>
-                <input id="password-register" name="password" className="form-control" type="password" placeholder="رمز عبور خود را وارد کنید" />
+                <input id="password-register" name="password" className="form-control" type="password" placeholder="یک رمز عبور انتخاب کنید" />
               </div>
               <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
                 ثبت نام دانشجو
