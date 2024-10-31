@@ -30,13 +30,13 @@ function HomeGuest() {
                 <label for="password-register" className="text-muted mb-1">
                   <small>رمز عبور</small>
                 </label>
-                <input id="password-register" name="password" className="form-control" type="password" placeholder="یک رمز عبور ایجاد کنید" />
+                <input id="password-register" name="password" className="form-control" type="password" placeholder="رمز عبور خود را وارد کنید" />
               </div>
               <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
                 ثبت نام دانشجو
               </button>
-              <Link className="teacher-submit" to={"/registerTeacher"}>
-                اگر استاد هستید برای ثبت نام اینجا کلیک کنید
+              <Link className="teacher-submit" to={"/RegisterTeacher"}>
+                <div>اگر استاد هستید برای ثبت نام اینجا کلیک کنید</div>
               </Link>
             </form>
           </div>
