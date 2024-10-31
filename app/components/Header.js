@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+import { Link } from "react-router-dom"
 
 function Header() {
   return (
@@ -7,10 +8,10 @@ function Header() {
         <div className="d-flex flex-column flex-md-row align-items-center p-3">
           <img className="logo" src="white-logo.png"></img>
           <h4 className="my-0 mr-md-auto font-weight-normal">
-            <a href="/" className="text-white">
+            <Link to="/" className="text-white">
               {" "}
               برنامه اساتید دانشگاه قم{" "}
-            </a>
+            </Link>
           </h4>
           <form className="mb-0 pt-2 pt-md-0">
             <div className="row align-items-center">

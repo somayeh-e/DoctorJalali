@@ -1,10 +1,11 @@
 import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
+import Container from "./Container"
 
 function HomeGuest() {
   return (
     <>
-      <div className="container py-md-5">
+      <Container wide={true}>
         <div className="row align-items-center">
           <div className="col-lg-7 py-3 py-md-5 direction login">
             <h1 className="display-3">برنامه ریزی هوشمند؟</h1>
@@ -28,13 +29,13 @@ function HomeGuest() {
               <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
                 ثبت نام دانشجو
               </button>
-              <Link className="teacher-submit" to={"/RegisterTeacher"}>
+              <Link className="teacher-submit" to={"/register-teacher"}>
                 <div>اگر استاد هستید برای ثبت نام اینجا کلیک کنید</div>
               </Link>
             </form>
           </div>
         </div>
-      </div>
+      </Container>
     </>
   )
 }
