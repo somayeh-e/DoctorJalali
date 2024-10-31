@@ -21,25 +21,29 @@ form input {
 
 .logo {
   width: 70px;
-  height: 70px;
+  height: 60px;
   margin-right: 15px;
+  margin-left: 89px;
 }
 
 .teacher-submit {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 35px;
   color: #000;
   text-decoration: none;
   position: absolute;
   width: 70%;
-  margin-right: 14%;
+  margin-right: 13%;
   transition: color 0.2s;
 }
+
 .teacher-submit:hover {
   text-decoration: none;
 }
+
 .teacher-login {
   margin-left: 5px;
+  margin-right: 60px;
 }
 
 /* prev changes */

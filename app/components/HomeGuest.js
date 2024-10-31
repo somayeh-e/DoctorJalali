@@ -29,7 +29,7 @@ function HomeGuest() {
                 ثبت نام دانشجو
               </button>
               <Link className="teacher-submit" to={"/RegisterTeacher"}>
-                اگر استاد هستید برای ثبت نام اینجا کلیک کنید
+                <div>اگر استاد هستید برای ثبت نام اینجا کلیک کنید</div>
               </Link>
             </form>
           </div>
