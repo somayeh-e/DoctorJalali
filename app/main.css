@@ -11,27 +11,8 @@ form input {
   text-align: right;
 }
 
-/* .teacher-form {
-  margin: auto;
-  position: absolute;
-  right: 0;
-} */
-
-.flex-input {
-  display: flex;
-  gap: 8px;
-}
-
-.option-width {
-  width: 50%;
-}
-
-option {
-  font-family: "Vazirmatn";
-}
-
-.margin-teacher-register {
-  margin-top: -80px;
+.teacher-form {
+  direction: rtl;
 }
 
 .text-white {
@@ -51,7 +32,7 @@ option {
   text-decoration: none;
   position: absolute;
   width: 70%;
-  margin-right: 10%;
+  margin-right: 14%;
   transition: color 0.2s;
 }
 .teacher-submit:hover {
