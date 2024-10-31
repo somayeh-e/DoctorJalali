@@ -11,11 +11,17 @@ function ProEdit() {
         <form class="col-lg-6 offset-lg-3 direction">
           <div className="form-row">
             <div className="form-group col-md-6">
+              <label for="email-register" className="text-muted mb-1">
+                <small>عکس پروفایل</small>
+              </label>
+              <input id="email-register" name="email" className="form-control" type="file" autocomplete="off" />
+            </div>
+            {/* <div className="form-group col-md-6">
               <label for="username-register" className="text-muted mb-1">
                 <small>نام و نام خانوادگی</small>
               </label>
               <input id="username-register" name="username" className="form-control" type="text" autocomplete="off" />
-            </div>
+            </div> */}
 
             <div className="form-group col-md-6">
               <label for="username-register" className="text-muted mb-1">
@@ -25,7 +31,7 @@ function ProEdit() {
             </div>
           </div>
 
-          <div className="form-row">
+          {/* <div className="form-row">
             <div className="form-group col-md-6">
               <label for="group" className="text-muted mb-1">
                 <small>گروه</small>
@@ -51,7 +57,7 @@ function ProEdit() {
                 ))}
               </select>
             </div>
-          </div>
+          </div> */}
 
           <div className="form-row">
             <div className="form-group col-md-6">
@@ -69,7 +75,7 @@ function ProEdit() {
             </div>
           </div>
 
-          <div className="form-row">
+          {/* <div className="form-row">
             <div className="form-group col-md-6">
               <label htmlFor="password-register" className="text-muted mb-1">
                 <small>شماره تلفن </small>
@@ -83,10 +89,10 @@ function ProEdit() {
               </label>
               <input id="password-register" name="password" className="form-control" type="email" />
             </div>
-          </div>
+          </div> */}
 
           <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
-            ثبت نام
+            ویرایش
           </button>
         </form>
       </div>
