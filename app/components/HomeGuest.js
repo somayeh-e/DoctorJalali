@@ -1,11 +1,12 @@
 import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import Container from "./Container"
+import Page from "./Page"
 
 function HomeGuest() {
   return (
     <>
-      <Container wide={true}>
+      <Page wide={true} title="Welcome!">
         <div className="row align-items-center">
           <div className="col-lg-7 py-3 py-md-5 direction login">
             <h1 className="display-3">برنامه ریزی هوشمند؟</h1>
@@ -35,7 +36,7 @@ function HomeGuest() {
             </form>
           </div>
         </div>
-      </Container>
+      </Page>
     </>
   )
 }
