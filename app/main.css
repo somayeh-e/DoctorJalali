@@ -1,10 +1,3 @@
-@font-face {
-  font-family: "Vazirmatn";
-  src: url("./fonts/webfonts/Vazirmatn[wght].woff2") format("woff2 supports variations"), url("./fonts/webfonts/Vazirmatn[wght].woff2") format("woff2-variations");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
 /* colors
 #007bff
 #28a745
@@ -53,17 +46,16 @@ option {
 
 .teacher-submit {
   display: inline-block;
-  margin-top: 15px;
+  margin-top: 20px;
   color: #000;
   text-decoration: none;
   position: absolute;
-  right: 15px;
-  transition: border-bottom 0.1s;
+  width: 70%;
+  margin-right: 10%;
+  transition: color 0.2s;
 }
 .teacher-submit:hover {
-  border-bottom: 3px solid #007bff;
   text-decoration: none;
-  color: #000;
 }
 .teacher-login {
   margin-left: 5px;
