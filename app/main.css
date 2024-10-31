@@ -45,7 +45,9 @@ form input {
   margin-left: 5px;
   margin-right: 60px;
 }
-
+.login {
+  padding-right: 50px;
+}
 /* prev changes */
 body {
   font-family: "Vazirmatn" !important;

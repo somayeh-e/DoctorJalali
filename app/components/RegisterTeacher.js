@@ -6,8 +6,8 @@ function RegisterTeacher() {
 
   return (
     <>
-      <div className="container py-md-5">
-        <form class="col-lg-6 offset-lg-3">
+      <div className="container py-md-5 ">
+        <form class="col-lg-6 offset-lg-3 direction">
           <div className="form-row">
             <div className="form-group col-md-6">
               <label for="username-register" className="text-muted mb-1">
