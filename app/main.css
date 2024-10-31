@@ -33,12 +33,21 @@ form input {
   width: 50%;
 }
 
-option {
-  font-family: "Vazirmatn";
-}
-
 .margin-teacher-register {
   margin-top: -80px;
+}
+
+.form-edit-center {
+  margin: 20px auto 0 auto;
+}
+
+.form-width-edit {
+  width: 60%;
+}
+
+.chat-border {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 .text-white {

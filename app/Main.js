@@ -7,15 +7,21 @@ import Header from "./components/Header"
 import HomeGuest from "./components/HomeGuest"
 import Footer from "./components/Footer"
 import RegisterTeacher from "./components/RegisterTeacher"
+import ProHeaderLoggedIn from "./components/ProHeaderLoggedIn"
+import ProProfile from "./components/ProProfile"
+import StuProfile from "./components/StuProfile"
 
 function Main() {
   return (
     <>
       <BrowserRouter>
-        <Header />
+        {/* <Header /> */}
+        <ProHeaderLoggedIn />
         <Routes>
           <Route path="/" element={<HomeGuest />} />
-          <Route path="/RegisterTeacher" element={<RegisterTeacher />} />
+          <Route path="/registerTeacher" element={<RegisterTeacher />} />
+          <Route path="/profileTeacher/*" element={<ProProfile />} />
+          <Route path="/profileStudent/*" element={<StuProfile />} />
         </Routes>
         <Footer />
       </BrowserRouter>

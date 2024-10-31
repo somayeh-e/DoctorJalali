@@ -35,7 +35,7 @@ function HomeGuest() {
               <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
                 ثبت نام دانشجو
               </button>
-              <Link className="teacher-submit" to={"/RegisterTeacher"}>
+              <Link className="teacher-submit" to={"/registerTeacher"}>
                 اگر استاد هستید برای ثبت نام اینجا کلیک کنید
               </Link>
             </form>
