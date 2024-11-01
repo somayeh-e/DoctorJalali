@@ -8,7 +8,7 @@ function HomeGuest() {
         <div className="row align-items-center">
           <div className="col-lg-7 py-3 py-md-5 direction">
             <h1 className="display-3">برنامه ریزی هوشمند؟</h1>
-            <p className="lead text-muted">سایت برنامه هفتگی اساتید به شما امکان می‌دهد تا به‌راحتی به زمان‌بندی کلاس‌ها و برنامه‌های آموزشی اساتید دسترسی پیدا کنید و با اطلاعات به‌روز، برنامه‌ریزی بهتری داشته باشید</p>
+            <p className="lead text-muted">سایت برنامه هفتگی اساتید به شما امکان می‌دهد تا به‌راحتی به زمان‌بندی کلاس‌ها و برنامه‌های آموزشی اساتید دسترسی پیدا کنید و با اطلاعات به‌روز، برنامه‌ریزی بهتری داشته باشید .</p>
           </div>
           <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5 direction">
             <form>
