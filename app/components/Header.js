@@ -14,7 +14,6 @@ function Header() {
               برنامه اساتید دانشگاه قم{" "}
             </Link>
           </h4>
-<<<<<<< HEAD
           <form className="mb-0 pt-2 pt-md-0">
             <div className="row align-items-center">
               <div className="col-md mr-0 pr-md-0 mb-3 mb-md-0">
@@ -29,9 +28,6 @@ function Header() {
               </div>
             </div>
           </form>
-=======
-          <HeaderLoggedOut />
->>>>>>> 1e2773c8e4164f2bb424b338e9432bbd45d1e8a5
         </div>
       </header>
     </>

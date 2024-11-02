@@ -30,46 +30,19 @@ function HomeGuest() {
             <p className="lead text-muted">سایت برنامه هفتگی اساتید به شما امکان می‌دهد تا به‌راحتی به زمان‌بندی کلاس‌ها و برنامه‌های آموزشی اساتید دسترسی پیدا کنید و با اطلاعات به‌روز، برنامه‌ریزی بهتری داشته باشید .</p>
           </div>
           <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5 direction">
-<<<<<<< HEAD
-            <form>
-              <div className="form-group">
-                <label for="email-register" className="text-muted mb-1">
-                  <small>عکس پروفایل</small>
-                </label>
-                <input id="email-register" name="email" className="form-control" type="file" autocomplete="off" />
-              </div>
-
+            <form className="login-form">
               <div className="form-group">
                 <label for="username-register" className="text-muted mb-1">
-                  <small>نام و نام خانوادگی</small>
-                </label>
-                <input id="username-register" name="username" className="form-control" type="text" autocomplete="off" />
-              </div>
-
-              <div className="form-group">
-                <label for="password-register" className="text-muted mb-1">
                   <small>شماره دانشجویی</small>
                 </label>
-                <input id="password-register" name="password" className="form-control" type="password" placeholder="شماره دانشجویی خود را وارد کنید" />
-=======
-            <form onSubmit={handleSubmit} className="login-form">
-              <div className="form-group">
-                <label htmlFor="username-register" className="text-muted mb-1">
-                  <small>شماره دانشجویی</small>
-                </label>
-                <input onChange={e => setUsername(e.target.value)} id="username-register" name="username" className="form-control" type="text" placeholder="شماره دانشجویی خود را وارد کنید" autoComplete="off" />
->>>>>>> 1e2773c8e4164f2bb424b338e9432bbd45d1e8a5
+                <input id="username-register" name="username" className="form-control" type="text" placeholder="شماره دانشجویی خود را وارد کنید" autocomplete="off" />
               </div>
 
               <div className="form-group">
                 <label htmlFor="password-register" className="text-muted mb-1">
                   <small>رمز عبور</small>
                 </label>
-<<<<<<< HEAD
-                <input id="password-register" name="password" className="form-control" type="password" placeholder="یک رمز عبور انتخاب کنید" />
-=======
-                <input onChange={e => setPassword(e.target.value)} id="password-register" name="password" className="form-control" type="password" placeholder="رمز عبور خود را وارد کنید" />
->>>>>>> 1e2773c8e4164f2bb424b338e9432bbd45d1e8a5
+                <input id="password-register" name="password" className="form-control" type="password" placeholder="رمز عبور خود را وارد کنید" />
               </div>
               <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
                 ثبت نام دانشجو
