@@ -21,10 +21,9 @@ function Main() {
         <ProHeaderLoggedIn />
         <Routes>
           <Route path="/" element={<HomeGuest />} />
-          <Route path="/registerTeacher" element={<RegisterTeacher />} />
+          <Route path="/register-teacher" element={<RegisterTeacher />} />
           <Route path="/profileTeacher/*" element={<ProProfile />} />
           <Route path="/profileStudent/*" element={<StuProfile />} />
-          {/*<Route path="/register-teacher" element={<RegisterTeacher />} />*/}
           <Route path="/about-us" element={<About />} />
           <Route path="/terms" element={<Terms />} />
         </Routes>

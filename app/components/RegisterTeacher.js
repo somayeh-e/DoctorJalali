@@ -1,14 +1,27 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
+import Page from "./Page"
 
 function RegisterTeacher() {
   const groups = ["آمار", "اخلاق", "اقتصاد اسلامي", "تربيت  بدني", "حسابداري", "حقوق  جزا و جرم  شناسي", "حقوق  خصوصي", "حقوق بين الملل", "حقوق عمومي", "حقوق مالكيت فكري", "رياضي", "زبان  و ادبيات  انگليسي", "زبان  و ادبيات  عربي", "زبان  و ادبيات  فارسي", "زيست شناسي", "شيعه شناسي", "شيمي", "علم اطلاعات و دانش شناسي", "علوم  تربيتي", "علوم قرآن و حديث", "علوم كامپيوتر", "فقه  و مباني  حقوق  اسلامي", "فلسفه  و كلام  اسلامي", "فيزيك", "مديريت بازرگاني", "مديريت صنعتي", "معارف", "معماري", "مهندسي  صنايع", "مهندسي برق", "مهندسي شيمي", "مهندسي عمران", "مهندسي كامپيوتر", "مهندسي مكانيك"]
 
   const ranks = ["استاد تمام", "دانشيار", "استادیار", "مربی"]
 
+  const [username, setUsername] = useState()
+  const [password, setPassword] = useState()
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    try {
+      await Axios.post("https://schedule-professor.liara.run/professor/register", { username, password })
+      console.log("User was successfully created.")
+    } catch (e) {
+      console.log("There was an error.")
+    }
+  }
   return (
     <>
-      <div className="container py-md-5 ">
-        <form class="col-lg-6 offset-lg-3 direction">
+      <Page title="Welcome!">
+        <form onSubmit={handleSubmit} class="col-lg-6 offset-lg-3 direction">
           <div className="form-row">
             <div className="form-group width-input">
               <label for="email-register" className="text-muted mb-1">
@@ -95,7 +108,7 @@ function RegisterTeacher() {
             ثبت نام
           </button>
         </form>
-      </div>
+      </Page>
     </>
   )
 }

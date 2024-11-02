@@ -15,7 +15,7 @@ function HomeGuest() {
     e.preventDefault()
     try {
       await Axios.post("https://schedule-professor.liara.run/s/login", { username, password })
-      console.log("User was seccussfully created.")
+      console.log("User was successfully created.")
     } catch (e) {
       console.log("There was an error.")
     }
@@ -30,7 +30,7 @@ function HomeGuest() {
             <p className="lead text-muted">سایت برنامه هفتگی اساتید به شما امکان می‌دهد تا به‌راحتی به زمان‌بندی کلاس‌ها و برنامه‌های آموزشی اساتید دسترسی پیدا کنید و با اطلاعات به‌روز، برنامه‌ریزی بهتری داشته باشید .</p>
           </div>
           <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5 direction">
-            <form className="login-form">
+            <form onSubmit={handleSubmit} className="login-form">
               <div className="form-group">
                 <label for="username-register" className="text-muted mb-1">
                   <small>شماره دانشجویی</small>
