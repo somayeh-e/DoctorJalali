@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
+import HeaderLoggedOut from "./HeaderLoggedOut"
 
 function Header() {
   return (
@@ -13,20 +14,7 @@ function Header() {
               برنامه اساتید دانشگاه قم{" "}
             </Link>
           </h4>
-          <form className="mb-0 pt-2 pt-md-0">
-            <div className="row align-items-center">
-              <div className="col-md mr-0 pr-md-0 mb-3 mb-md-0">
-                <input name="username" className="form-control form-control-sm input-dark" type="text" placeholder="نام کاربری" autocomplete="off" />
-              </div>
-              <div className="col-md mr-0 pr-md-0 mb-3 mb-md-0">
-                <input name="password" className="form-control form-control-sm input-dark" type="password" placeholder="رمز عبور" />
-              </div>
-              <div className="col-md-auto">
-                <button className="btn btn-success btn-sm student-login">ورود دانشجو</button>
-                <button className="btn btn-success btn-sm teacher-login">ورود استاد</button>
-              </div>
-            </div>
-          </form>
+          <HeaderLoggedOut />
         </div>
       </header>
     </>
