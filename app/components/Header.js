@@ -1,4 +1,6 @@
 import React, { useEffect } from "react"
+import { Link } from "react-router-dom"
+import HeaderLoggedOut from "./HeaderLoggedOut"
 
 function Header() {
   return (
@@ -7,11 +9,12 @@ function Header() {
         <div className="container d-flex flex-column flex-md-row align-items-center p-3">
           <img className="logo" src="white-logo.png"></img>
           <h4 className="my-0 mr-md-auto font-weight-normal">
-            <a href="/" className="text-white">
+            <Link to="/" className="text-white">
               {" "}
               برنامه اساتید دانشگاه قم{" "}
-            </a>
+            </Link>
           </h4>
+<<<<<<< HEAD
           <form className="mb-0 pt-2 pt-md-0">
             <div className="row align-items-center">
               <div className="col-md mr-0 pr-md-0 mb-3 mb-md-0">
@@ -26,6 +29,9 @@ function Header() {
               </div>
             </div>
           </form>
+=======
+          <HeaderLoggedOut />
+>>>>>>> 1e2773c8e4164f2bb424b338e9432bbd45d1e8a5
         </div>
       </header>
     </>
