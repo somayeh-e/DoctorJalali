@@ -28,44 +28,37 @@ form input {
 
 .teacher-submit {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 35px;
   color: #000;
   text-decoration: none;
   position: absolute;
   width: 70%;
-  margin-right: 10%;
+  margin-right: 13%;
   transition: color 0.2s;
 }
+
 .teacher-submit:hover {
   text-decoration: none;
 }
 
 .teacher-login {
   margin-left: 5px;
+  margin-right: 60px;
 }
-
-.form-width-edit {
-  width: 60%;
-}
-.form-edit-center {
-  margin: 20px auto 0 auto;
-}
-
-.option-width {
-  width: 50%;
-}
-
-.width-input {
-  width: 100%;
+.login {
+  padding-right: 50px;
 }
 
 /* prev changes */
+
 body {
   font-family: "Vazirmatn" !important;
 }
 
 .header-bar {
   background-color: #292929;
+  padding: 0;
+  margin: 0;
 }
 
 .container--narrow {

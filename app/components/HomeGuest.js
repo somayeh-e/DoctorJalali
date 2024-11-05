@@ -14,7 +14,7 @@ function HomeGuest() {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      await Axios.post("https://schedule-professor.liara.run/s/login", { username, password })
+      await Axios.post("https://localhost:3005/s/login", { username, password })
       console.log("User was successfully created.")
     } catch (e) {
       console.log("There was an error.")
@@ -25,7 +25,7 @@ function HomeGuest() {
     <>
       <Page wide={true} title="Welcome!">
         <div className="row align-items-center">
-          <div className="col-lg-7 py-3 py-md-5 direction">
+          <div className="col-lg-7 py-3 py-md-5 direction login">
             <h1 className="display-3">برنامه ریزی هوشمند؟</h1>
             <p className="lead text-muted">سایت برنامه هفتگی اساتید به شما امکان می‌دهد تا به‌راحتی به زمان‌بندی کلاس‌ها و برنامه‌های آموزشی اساتید دسترسی پیدا کنید و با اطلاعات به‌روز، برنامه‌ریزی بهتری داشته باشید .</p>
           </div>

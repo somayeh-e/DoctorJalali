@@ -17,8 +17,8 @@ function Main() {
   return (
     <>
       <BrowserRouter>
-        {/* <Header /> */}
-        <ProHeaderLoggedIn />
+        <Header />
+        {/* <ProHeaderLoggedIn /> */}
         <Routes>
           <Route path="/" element={<HomeGuest />} />
           <Route path="/register-teacher" element={<RegisterTeacher />} />
