@@ -15,7 +15,7 @@ function HomeGuest() {
     e.preventDefault()
     try {
       await Axios.post("https://schedule-professor.liara.run/s/login", { username, password })
-      console.log("User was seccussfully created.")
+      console.log("User was successfully created.")
     } catch (e) {
       console.log("There was an error.")
     }
@@ -25,24 +25,24 @@ function HomeGuest() {
     <>
       <Page wide={true} title="Welcome!">
         <div className="row align-items-center">
-          <div className="col-lg-7 py-3 py-md-5 direction login">
+          <div className="col-lg-7 py-3 py-md-5 direction">
             <h1 className="display-3">برنامه ریزی هوشمند؟</h1>
-            <p className="lead text-muted">سایت برنامه هفتگی اساتید به شما امکان می‌دهد تا به‌راحتی به زمان‌بندی کلاس‌ها و برنامه‌های آموزشی اساتید دسترسی پیدا کنید و با اطلاعات به‌روز، برنامه‌ریزی بهتری داشته باشید.</p>
+            <p className="lead text-muted">سایت برنامه هفتگی اساتید به شما امکان می‌دهد تا به‌راحتی به زمان‌بندی کلاس‌ها و برنامه‌های آموزشی اساتید دسترسی پیدا کنید و با اطلاعات به‌روز، برنامه‌ریزی بهتری داشته باشید .</p>
           </div>
           <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5 direction">
             <form onSubmit={handleSubmit} className="login-form">
               <div className="form-group">
-                <label htmlFor="username-register" className="text-muted mb-1">
+                <label for="username-register" className="text-muted mb-1">
                   <small>شماره دانشجویی</small>
                 </label>
-                <input onChange={e => setUsername(e.target.value)} id="username-register" name="username" className="form-control" type="text" placeholder="شماره دانشجویی خود را وارد کنید" autoComplete="off" />
+                <input id="username-register" name="username" className="form-control" type="text" placeholder="شماره دانشجویی خود را وارد کنید" autocomplete="off" />
               </div>
 
               <div className="form-group">
                 <label htmlFor="password-register" className="text-muted mb-1">
                   <small>رمز عبور</small>
                 </label>
-                <input onChange={e => setPassword(e.target.value)} id="password-register" name="password" className="form-control" type="password" placeholder="رمز عبور خود را وارد کنید" />
+                <input id="password-register" name="password" className="form-control" type="password" placeholder="رمز عبور خود را وارد کنید" />
               </div>
               <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
                 ثبت نام دانشجو

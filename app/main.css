@@ -28,26 +28,37 @@ form input {
 
 .teacher-submit {
   display: inline-block;
-  margin-top: 35px;
+  margin-top: 20px;
   color: #000;
   text-decoration: none;
   position: absolute;
   width: 70%;
-  margin-right: 13%;
+  margin-right: 10%;
   transition: color 0.2s;
 }
-
 .teacher-submit:hover {
   text-decoration: none;
 }
 
 .teacher-login {
   margin-left: 5px;
-  margin-right: 60px;
 }
-.login {
-  padding-right: 50px;
+
+.form-width-edit {
+  width: 60%;
 }
+.form-edit-center {
+  margin: 20px auto 0 auto;
+}
+
+.option-width {
+  width: 50%;
+}
+
+.width-input {
+  width: 100%;
+}
+
 /* prev changes */
 body {
   font-family: "Vazirmatn" !important;
