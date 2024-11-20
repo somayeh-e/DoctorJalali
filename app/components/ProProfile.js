@@ -1,10 +1,15 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useContext } from "react"
 import { NavLink, Route, Routes } from "react-router-dom"
+import StateContext from "../StateContext"
+import LoadingDotsIcon from "./LoadingDotsIcon"
 
 import ProEdit from "./ProEdit"
 import ProChat from "./ProChat"
+import ProProgram from "./ProProgram"
 
 function ProProfile() {
+  const appState = useContext(StateContext)
+
   return (
     <>
       <div class="container py-md-5">
@@ -28,7 +33,7 @@ function ProProfile() {
         <Routes>
           <Route path="" element={<ProEdit />} />
           <Route path="messages" element={<ProChat />} />
-          {/* <Route path="program" element={<ProProgram />} /> */}
+          <Route path="program" element={appState.isLoading ? <LoadingDotsIcon /> : <ProProgram />} />
         </Routes>
       </div>
     </>

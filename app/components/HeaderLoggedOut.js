@@ -7,7 +7,7 @@ function HeaderLoggedOut() {
 
   async function handleLoginStudent() {
     try {
-      const response = await Axios.post("https://schedule-professor.liara.run/s/login", { username, password })
+      const response = await Axios.post("https://localhost:3005/s/login", { username, password })
       if (response.data) {
         console.log(response.data)
       } else {
