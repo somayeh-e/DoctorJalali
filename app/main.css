@@ -145,6 +145,7 @@ form input {
 .form-width-edit {
   width: 60%;
 }
+<<<<<<< HEAD
 .form-edit-center {
   margin: 20px auto 0 auto;
 }
@@ -166,13 +167,19 @@ form input {
 }
 
 /***********************************************************************************************/
+=======
+
+>>>>>>> 28e76b9a72f30eedb04d7a94299f5587cb4c311e
 /* prev changes */
+
 body {
   font-family: "Vazirmatn" !important;
 }
 
 .header-bar {
   background-color: #292929;
+  padding: 0;
+  margin: 0;
 }
 
 .container--narrow {
