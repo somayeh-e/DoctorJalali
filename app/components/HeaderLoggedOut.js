@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import Axios from "axios"
+import DispatchContext from "../DispatchContext"
 
-function HeaderLoggedOut() {
+function HeaderLoggedOut(props) {
+  const appDispatch = useContext(DispatchContext)
+
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
 
   async function handleLoginStudent() {
     try {
-      const response = await Axios.post("https://localhost:3005/s/login", { username, password })
+      const response = await Axios.post("https://schedule-professor.liara.run/s/login", { username, password })
       if (response.data) {
-        console.log(response.data)
+        // console.log(response.data)
+        appDispatch({ type: "login", data: response.data })
       } else {
         console.log("Incorrect username / password.")
       }
@@ -22,7 +26,8 @@ function HeaderLoggedOut() {
     try {
       const response = await Axios.post("https://schedule-professor.liara.run/professor/login", { username, password })
       if (response.data) {
-        console.log(response.data)
+        // console.log(response.data)
+        appDispatch({ type: "login" })
       } else {
         console.log("Incorrect username / password.")
       }

@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react"
 import Page from "./Page"
-<<<<<<< HEAD
-import Axios from "axios"
-=======
->>>>>>> 28e76b9a72f30eedb04d7a94299f5587cb4c311e
 
 function RegisterTeacher() {
   const groups = ["آمار", "اخلاق", "اقتصاد اسلامي", "تربيت  بدني", "حسابداري", "حقوق  جزا و جرم  شناسي", "حقوق  خصوصي", "حقوق بين الملل", "حقوق عمومي", "حقوق مالكيت فكري", "رياضي", "زبان  و ادبيات  انگليسي", "زبان  و ادبيات  عربي", "زبان  و ادبيات  فارسي", "زيست شناسي", "شيعه شناسي", "شيمي", "علم اطلاعات و دانش شناسي", "علوم  تربيتي", "علوم قرآن و حديث", "علوم كامپيوتر", "فقه  و مباني  حقوق  اسلامي", "فلسفه  و كلام  اسلامي", "فيزيك", "مديريت بازرگاني", "مديريت صنعتي", "معارف", "معماري", "مهندسي  صنايع", "مهندسي برق", "مهندسي شيمي", "مهندسي عمران", "مهندسي كامپيوتر", "مهندسي مكانيك"]
-
   const ranks = ["استاد تمام", "دانشيار", "استادیار", "مربی"]
 
   const [username, setUsername] = useState()
@@ -22,17 +17,12 @@ function RegisterTeacher() {
       console.log("There was an error.")
     }
   }
+
   return (
     <>
-      <Page title="Welcome!">
-        <form onSubmit={handleSubmit} class="col-lg-6 offset-lg-3 direction">
+      <Page title="خوش آمدید">
+        <form onSubmit={handleSubmit} class="col-lg-9 offset-lg-1 direction">
           <div className="form-row">
-            <div className="form-group width-input">
-              <label for="email-register" className="text-muted mb-1">
-                <small>عکس پروفایل</small>
-              </label>
-              <input id="email-register" name="email" className="form-control" type="file" autocomplete="off" />
-            </div>
             <div className="form-group col-md-6">
               <label for="username-register" className="text-muted mb-1">
                 <small>نام و نام خانوادگی</small>
