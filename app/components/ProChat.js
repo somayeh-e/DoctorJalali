@@ -1,43 +1,96 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useContext, useState } from "react"
+import StateContext from "../StateContext"
+import DispatchContext from "../DispatchContext"
+import Axios from "axios"
+import moment from "jalali-moment"
+import { useNavigate } from "react-router-dom"
 
 function ProChat() {
+  const appDispatch = useContext(DispatchContext)
+  const appState = useContext(StateContext)
+
+  const navigate = useNavigate()
+
+  const [conversations, setConversations] = useState([])
+
+  useEffect(() => {
+    async function fetchConversations() {
+      try {
+        const res = appState.isProfessor ? await Axios.get(`/professor/conversations/${appState.user.id}`) : await Axios.get(`/s/conversations/${appState.user.id}`)
+        setConversations(res.data)
+      } catch (error) {
+        console.log(error.messages)
+      }
+    }
+
+    fetchConversations()
+    console.log(conversations)
+  }, [])
+
+  function getTime(date) {
+    moment.locale("fa", { useGregorianParser: true })
+    const iranTime = moment(date).format().split("T")
+    const dateShamsi = iranTime[0]
+    const time = iranTime[1].split("+")[0]
+    return [dateShamsi, time]
+  }
+
+  function handleClick(roomId, senderName, imageStudent, imageProfessor) {
+    appDispatch({ type: "showChatroom" })
+    const studentId = roomId.split("-")[0]
+    const professorId = roomId.split("-")[1]
+    navigate(`/profile/${appState.user.id}/messages`, {
+      state: {
+        studentId,
+        professorId,
+        senderName,
+        imageStudent,
+        isStudent: appState.isProfessor ? false : true
+      }
+    })
+  }
+
   return (
     <>
-      <div class="container container--narrow py-md-5">
-        <div id="chat-wrapper" class="shadow border-top border-left border-right chat-border">
-          <div class="chat-title-bar bg-primary chat-border">
-            صفحه چت
-            <span class="chat-title-bar bg-primary">
-              {/* <i class="fas fa-times-circle"></i> */}
-              ارسال به : سمیه اقبالیون
-            </span>
-          </div>
-          <div id="chat" class="chat-log">
-            <div class="chat-self">
-              <div class="chat-message">
-                <div class="chat-message-inner">سلام</div>
-              </div>
-              <img class="chat-avatar avatar-tiny" src="profile.jpg"></img>
-            </div>
+      <div className="container chat-center">
+        <table className="table table-bordered">
+          <thead className="chat-inner-bg-color">
+            <tr>
+              <th>عملیات</th>
+              <th>{appState.isProfessor ? "فرستنده" : "گیرنده"}</th>
+              {appState.isProfessor ? <th>شماره دانشجویی</th> : ""}
+              <th>تعداد گفتگو</th>
+              <th>تاریخ و زمان ثبت</th>
+              <th>وضعیت</th>
+            </tr>
+          </thead>
+          <tbody>
+            {conversations.map(conversation => (
+              <tr key={conversation.roomId}>
+                <td>
+                  <button onClick={() => handleClick(conversation.roomId, appState.isProfessor ? conversation.studentId.name : conversation.professorId.name, conversation.studentId.image, conversation.professorId.image_profile)} className="show-button">
+                    نمایش
+                  </button>
+                </td>
+                {appState.isProfessor ? <td>{conversation.studentId.name}</td> : <td>{conversation.professorId.name}</td>}
 
-            <div class="chat-other">
-              <a href="#">
-                <img class="avatar-tiny" src="profile.jpg"></img>
-              </a>
-              <div class="chat-message">
-                <div class="chat-message-inner">
-                  <a href="#">
-                    <strong>سمیه اقبالیون : </strong>
-                  </a>
-                  سلام استاد وقت بخیر
-                </div>
-              </div>
-            </div>
-          </div>
-          <form id="chatForm" class="chat-form border-top">
-            <input type="text" class="chat-field" id="chatField" placeholder="پیام خود را وارد کنید..." autocomplete="off" />
-          </form>
-        </div>
+                {appState.isProfessor ? <td>{conversation.studentId.studentNumber}</td> : ""}
+
+                <td>{conversation.messages.length}</td>
+                <td>
+                  {getTime(conversation.createdAt)[0]} / {getTime(conversation.createdAt)[1]}
+                </td>
+                <td
+                  style={{
+                    color: conversation.status ? "#28a745" : "red"
+                  }}
+                >
+                  {conversation.status ? "پاسخ داده شده" : "پاسخ داده نشده"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   )

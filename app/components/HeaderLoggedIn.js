@@ -9,25 +9,18 @@ function HeaderLoggedIn(props) {
 
   function handleLogout() {
     appDispatch({ type: "logout" })
-    localStorage.removeItem("token")
-    localStorage.removeItem("username")
-    localStorage.removeItem("avatar")
   }
 
   return (
     <div class="flex-row my-3 my-md-0">
-      <span className="mr-2 header-chat-icon text-white">
-        <i className="fas fa-comment"></i>
-        <span className="chat-count-badge text-white"> </span>
-      </span>
-      <Link to={`/profile/${appState.user.username}`} className="mr-2">
-        <img className="small-header-avatar" src={appState.user.avatar} />
+      <Link to={`/profile/${appState.user.id}`} className="mr-2">
+        <img className="small-header-avatar" src="../images/profile.jpg" />
       </Link>
-      <a className="btn btn-sm btn-success mr-2" href="/create-post">
-        Create Post
-      </a>
+      <Link to={`/profile/${appState.user.id}`} className="btn btn-sm btn-success mr-2">
+        پروفایل
+      </Link>
       <button onClick={handleLogout} className="btn btn-sm btn-secondary signout">
-        Sign Out
+        خروج
       </button>
     </div>
   )

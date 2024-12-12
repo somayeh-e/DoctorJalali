@@ -4,9 +4,11 @@ function FlashMessages(props) {
   return (
     <div className="floating-alerts">
       {props.messages.map((msg, index) => {
-        ;<div key={index} className="alert alert-success text-center floating-alert shadow-sm">
-          {msg}
-        </div>
+        return (
+          <div key={index} className="alert alert-success text-success text-center floating-alert shadow-sm">
+            {msg}
+          </div>
+        )
       })}
     </div>
   )

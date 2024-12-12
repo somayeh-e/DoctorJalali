@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { Link } from "react-router-dom"
 import Axios from "axios"
 import Page from "./Page"
-
-/*
-  "https://schedule-professor.liara.run/professor/login"
-  "https://schedule-professor.liara.run/professor/register"
-  "https://schedule-professor.liara.run/s/login"
-*/
+import DispatchContext from "../DispatchContext"
 
 function HomeGuest() {
-  const [username, setUsername] = useState()
+  const [name, setName] = useState()
+  const [studentNumber, setStudentNumber] = useState()
   const [password, setPassword] = useState()
+
+  const appDispatch = useContext(DispatchContext)
 
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      await Axios.post("https://schedule-professor.liara.run/s/login", { username, password })
+      await Axios.post("/s/register", { name, studentNumber, password })
+      appDispatch({ type: "flashMessage", value: "با موفقیت ثبت نام شدید." })
       console.log("User was successfully created.")
     } catch (e) {
       console.log("There was an error.")
@@ -35,16 +34,23 @@ function HomeGuest() {
             <form onSubmit={handleSubmit} className="login-form">
               <div className="form-group">
                 <label htmlFor="username-register" className="text-muted mb-1">
+                  <small>نام کاربری</small>
+                </label>
+                <input onChange={e => setName(e.target.value)} id="username-register" name="username" className="form-control" type="text" placeholder=" نام کاربری خود را وارد کنید" autoComplete="off" />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="student-number-register" className="text-muted mb-1">
                   <small>شماره دانشجویی</small>
                 </label>
-                <input id="username-register" name="username" className="form-control" type="text" placeholder="شماره دانشجویی خود را وارد کنید" autoComplete="off" />
+                <input onChange={e => setStudentNumber(e.target.value)} id="student-number-register" name="username" className="form-control" type="text" placeholder="شماره دانشجویی خود را وارد کنید" autoComplete="off" />
               </div>
 
               <div className="form-group">
                 <label htmlFor="password-register" className="text-muted mb-1">
                   <small>رمز عبور</small>
                 </label>
-                <input id="password-register" name="password" className="form-control" type="password" placeholder="رمز عبور خود را وارد کنید" />
+                <input onChange={e => setPassword(e.target.value)} id="password-register" name="password" className="form-control" type="password" placeholder="رمز عبور خود را وارد کنید" />
               </div>
               <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
                 ثبت نام دانشجو

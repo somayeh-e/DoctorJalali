@@ -2,6 +2,8 @@ import React, { useState, useReducer, useEffect } from "react"
 import ReactDOM from "react-dom/client"
 import { useImmerReducer } from "use-immer"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Axios from "axios"
+Axios.defaults.baseURL = "http://localhost:3005"
 import { CSSTransition } from "react-transition-group"
 
 import StateContext from "./StateContext"
@@ -16,11 +18,10 @@ import Footer from "./components/Footer"
 import About from "./components/About"
 import Terms from "./components/Terms"
 import FlashMessages from "./components/FlashMessages"
-import ProProfile from "./components/ProProfile"
-import StuProfile from "./components/StuProfile"
-// import Profile from "./components/Profile"
-import HeaderLoggedIn from "./components/HeaderLoggedIn"
+import Profile from "./components/Profile"
 import CreateProgram from "./components/CreateProgram"
+import Login from "./components/Login"
+import ProfessorPage from "./components/ProfessorPage"
 
 function Main() {
   const initialState = {
@@ -28,11 +29,16 @@ function Main() {
     flashMessages: [],
     user: {
       token: localStorage.getItem("token"),
+      id: localStorage.getItem("id"),
+      // id: "6691aae27cbe05c1bf288d15",
       username: localStorage.getItem("username"),
-      avatar: localStorage.getItem("avatar")
+      studentNumber: localStorage.getItem("studentNumber"),
+      image: localStorage.getItem("image")
     },
     isCreateProgramOpen: false,
-    isLoading: false
+    isShowChatroom: false,
+    schedules: [],
+    isProfessor: true
   }
 
   function ourReducer(draft, action) {
@@ -53,11 +59,18 @@ function Main() {
       case "closeCreateProgram":
         draft.isCreateProgramOpen = false
         return
-      case "isLoading":
-        draft.isLoading = true
+      case "showChatroom":
+        draft.isShowChatroom = true
         return
-      case "notLoading":
-        draft.isLoading = false
+      case "hideChatroom":
+        draft.isShowChatroom = false
+        return
+      case "addSchedule":
+        draft.schedules.push(action.value)
+        return
+      case "isProfessor":
+        draft.isProfessor = true
+        return
     }
   }
 
@@ -67,11 +80,11 @@ function Main() {
     if (state.loggedIn) {
       localStorage.setItem("token", state.user.token)
       localStorage.setItem("username", state.user.username)
-      localStorage.setItem("avatar", state.user.avatar)
+      localStorage.setItem("id", state.user.id)
     } else {
       localStorage.removeItem("token")
       localStorage.removeItem("username")
-      localStorage.removeItem("avatar")
+      localStorage.removeItem("id")
     }
   }, [state.loggedIn])
 
@@ -83,12 +96,16 @@ function Main() {
             <FlashMessages messages={state.flashMessages} />
             <Header />
             <Routes>
-              <Route path="/profileTeacher/*" element={<ProProfile />} />
-              <Route path="/profileStudent/*" element={<StuProfile />} />
-              <Route path="/" element={state.loggedIn ? <Home /> : <HomeGuest />} />
+              <Route path="/profile/:id/*" element={<Profile />} />
+              {/* <Route path="/profileTeacher/*" element={<ProProfile />} /> */}
+              {/* <Route path="/" element={state.loggedIn ? <Home /> : <HomeGuest />} /> */}
+              <Route path="/" element={<HomeGuest />} />
+              <Route path="/professors" element={<Home />} />
               <Route path="/register-teacher" element={<RegisterTeacher />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/terms" element={<Terms />} />
+              <Route path="/professor-page" element={<ProfessorPage />} />
             </Routes>
             <CSSTransition timeout={330} in={state.isCreateProgramOpen} classNames="search-overlay" unmountOnExit>
               <div className="search-overlay">
