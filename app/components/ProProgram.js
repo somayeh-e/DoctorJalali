@@ -3,15 +3,19 @@ import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
 import Axios from "axios"
 import CreateProgram from "./CreateProgram"
+import Test from "./Test"
 
 function ProProgram(props) {
   const times = ["8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"]
   const days = ["شنبه", "یکشنبه", "دو‌شنبه", "سه‌شنبه", "چهار‌شنبه", "پنج‌شنبه"]
   const termOptions = ["تابستان", "اول", "دوم"]
+  const defaultTasks = ["حضور در جلسات", "عدم حضور", "راهنمایی پایان نامه", "فعالیت اجرایی", "سایر"]
 
   const [academicYear, setAcademicYear] = useState("1403")
   const [term, setTerm] = useState("تابستان")
   const [editedSchedule, setEditedSchedule] = useState(null)
+  const [showSubmit, setShowSubmit] = useState(true)
+
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
 
@@ -28,6 +32,7 @@ function ProProgram(props) {
           setTerm(data.term)
           console.log(data.term)
           setAcademicYear(data.academicYear)
+          setShowSubmit(false)
         } else {
           appDispatch({ type: "flashMessage", value: "جدولی یافت نشد" })
         }
@@ -89,7 +94,7 @@ function ProProgram(props) {
 
   const getTask = (day, time) => {
     const entry = appState.schedules.find(schedule => schedule.day === day && schedule.startTime === time)
-    return entry ? entry.defaultTask : ""
+    return entry ? entry.task : ""
   }
 
   const convertToApiFormat = () => {
@@ -118,6 +123,7 @@ function ProProgram(props) {
     const endIndex = timeIndex + duration
     return times[endIndex] || startTime
   }
+
   async function handleSaveSchedule() {
     const infoSchedule = convertToApiFormat()
     console.log(infoSchedule)
@@ -143,6 +149,15 @@ function ProProgram(props) {
           let res = await Axios.get(`/schedule/${idSchedule}`)
           let apiSchedules = res.data.days
           convertApiFormatToReact(apiSchedules)
+          setShowSubmit(false)
+        } else {
+          if (show) {
+            appDispatch({ type: "flashMessage", value: "جدولی یافت نشد " })
+          } else {
+            appDispatch({ type: "flashMessage", value: "جدولی یافت نشد " })
+          }
+          appState.schedules = []
+          setShowSubmit(true)
         }
       } catch (err) {
         // console.log("error")
@@ -162,6 +177,7 @@ function ProProgram(props) {
           let res = await Axios.get(`/schedule/${idSchedule}`)
           let apiSchedules = res.data.days
           convertApiFormatToReact(apiSchedules)
+          setShowSubmit(false)
         }
       } catch (err) {
         // console.log("error")
@@ -186,12 +202,70 @@ function ProProgram(props) {
   function getSchedule(day, time) {
     const schedule = appState.schedules.find(entry => entry.day === day && entry.startTime === time)
     if (schedule) return schedule
-    return { day: day, startTime: time, duration: 1 }
+    else return { day: day, startTime: time, duration: 1, task: defaultTasks[0] }
   }
 
-  function CreateProgram(schedule) {
+  function openModal(schedule) {
     setEditedSchedule(schedule ? { ...schedule } : null)
     appDispatch({ type: "openCreateProgram" })
+  }
+  function closeModal() {
+    // editedSchedule = null
+    appDispatch({ type: "closeCreateProgram" })
+  }
+
+  function isOverlapping(newEntry) {
+    const newStartIndex = times.indexOf(newEntry.startTime)
+    const newEndIndex = newStartIndex + newEntry.duration
+
+    return appState.schedules.some(entry => {
+      if (entry.day !== newEntry.day) return false
+      const startIndex = times.indexOf(entry.startTime)
+      const endIndex = startIndex + entry.duration
+      return (newStartIndex >= startIndex && newStartIndex < endIndex) || (newEndIndex > startIndex && newEndIndex <= endIndex) || (newStartIndex <= startIndex && newEndIndex >= endIndex)
+    })
+  }
+
+  function saveScheduleEntry(newEntry) {
+    if (isOverlapping(newEntry)) {
+      alert("این کار با کارهای موجود تداخل دارد.")
+      return
+    }
+
+    if (editedSchedule && editedSchedule?.id) {
+      const index = appState.schedules.findIndex(entry => entry.id === editedSchedule.id)
+      if (index !== -1) {
+        appState.schedules.splice(index, 1, newEntry)
+      }
+    } else {
+      newEntry.id = Date.now() // Assign a unique id to the new entry
+      appDispatch({ type: "addSchedule", value: newEntry })
+    }
+
+    appDispatch({ type: "closeCreateProgram" })
+  }
+
+  // function deleteScheduleEntry() {
+  //   if (editedSchedule) {
+  //     const index = appState.schedules.findIndex(entry => entry.day === editedSchedule.day && entry.startTime === editedSchedule.startTime)
+  //     alert(index)
+  //     if (index !== -1) {
+  //       console.log(appState.schedules)
+  //       appState.schedules.splice(index, 1)
+  //       alert(appState.schedules)
+  //     }
+  //     appDispatch({ type: "closeCreateProgram" })
+  //   }
+  // }
+
+  function deleteScheduleEntry() {
+    if (editedSchedule) {
+      const newSchedules = appState.schedules.filter(entry => !(entry.day === editedSchedule.day && entry.startTime === editedSchedule.startTime))
+      console.log(newSchedules)
+      appDispatch({ type: "updateSchedule", value: newSchedules })
+      appDispatch({ type: "closeCreateProgram" })
+    }
+    console.log(appState.schedules)
   }
 
   function getCookie(name) {
@@ -207,14 +281,21 @@ function ProProgram(props) {
         <div className="container-row">
           {!props.show ? (
             <div className="top-buttons">
-              <button onClick={handleSaveSchedule} className="save-button">
-                {" "}
-                تایید نهایی{" "}
-              </button>
               <button onClick={() => appDispatch({ type: "openCreateProgram" })} className="add-button">
                 {" "}
                 ایجاد{" "}
               </button>
+              {showSubmit ? (
+                <button onClick={handleSaveSchedule} className="save-button">
+                  {" "}
+                  تایید نهایی{" "}
+                </button>
+              ) : (
+                <button onClick={handleSaveSchedule} className="save-button">
+                  {" "}
+                  ویرایش{" "}
+                </button>
+              )}
             </div>
           ) : (
             ""
@@ -273,7 +354,7 @@ function ProProgram(props) {
                         <td
                           key={index}
                           colSpan={colSpan}
-                          onClick={!props.show ? () => CreateProgram(getSchedule(day, time)) : null}
+                          onClick={!props.show ? () => openModal(getSchedule(day, time)) : null}
                           style={{
                             backgroundColor: isStartCell ? "#e0dfdf" : "transparent"
                           }}
@@ -283,7 +364,7 @@ function ProProgram(props) {
                         </td>
                       )
                     } else if (!isMerged) {
-                      return <td key={index} onClick={!props.show ? () => CreateProgram(getSchedule(day, time)) : null}></td>
+                      return <td key={index} onClick={!props.show ? () => openModal(getSchedule(day, time)) : null}></td>
                     }
 
                     return null
@@ -294,7 +375,7 @@ function ProProgram(props) {
           </table>
         </div>
       </div>
-      {/* {editedSchedule && <CreateProgram schedule={editedSchedule} />} */}
+      {appState.isCreateProgramOpen ? <CreateProgram defaultTasks={defaultTasks} days={days} times={times} editedSchedule={editedSchedule} close={closeModal} save={saveScheduleEntry} deleteTask={deleteScheduleEntry} /> : ""}
     </>
   )
 }

@@ -4,7 +4,6 @@ import { useImmerReducer } from "use-immer"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Axios from "axios"
 Axios.defaults.baseURL = "http://localhost:3005"
-import { CSSTransition } from "react-transition-group"
 
 import StateContext from "./StateContext"
 import DispatchContext from "./DispatchContext"
@@ -30,7 +29,6 @@ function Main() {
     user: {
       token: localStorage.getItem("token"),
       id: localStorage.getItem("id"),
-      // id: "6691aae27cbe05c1bf288d15",
       username: localStorage.getItem("username"),
       studentNumber: localStorage.getItem("studentNumber"),
       image: localStorage.getItem("image")
@@ -68,6 +66,8 @@ function Main() {
       case "addSchedule":
         draft.schedules.push(action.value)
         return
+      case "updateSchedule":
+        draft.schedules = action.value
       case "isProfessor":
         draft.isProfessor = true
         return
@@ -97,8 +97,6 @@ function Main() {
             <Header />
             <Routes>
               <Route path="/profile/:id/*" element={<Profile />} />
-              {/* <Route path="/profileTeacher/*" element={<ProProfile />} /> */}
-              {/* <Route path="/" element={state.loggedIn ? <Home /> : <HomeGuest />} /> */}
               <Route path="/" element={<HomeGuest />} />
               <Route path="/professors" element={<Home />} />
               <Route path="/register-teacher" element={<RegisterTeacher />} />
@@ -107,11 +105,6 @@ function Main() {
               <Route path="/terms" element={<Terms />} />
               <Route path="/professor-page" element={<ProfessorPage />} />
             </Routes>
-            <CSSTransition timeout={330} in={state.isCreateProgramOpen} classNames="search-overlay" unmountOnExit>
-              <div className="search-overlay">
-                <CreateProgram />
-              </div>
-            </CSSTransition>
             <Footer />
           </BrowserRouter>
         </DispatchContext.Provider>

@@ -11,9 +11,11 @@ function Header(props) {
     <>
       <header className="header-bar bg-primary mb-3">
         <div className="d-flex flex-column flex-md-row align-items-center p-3">
-          <img className="logo" src="../images/white-logo.png"></img>
+          <Link to="/">
+            <img className="logo" src="../images/white-logo.png"></img>
+          </Link>
           <h4 className="my-0 mr-md-auto font-weight-normal">
-            <Link to="/" className="text-white">
+            <Link to="/professors" className="text-white">
               {" "}
               برنامه اساتید دانشگاه قم{" "}
             </Link>

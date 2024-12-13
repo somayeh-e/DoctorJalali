@@ -2,8 +2,11 @@ import React, { useEffect, useState, useContext } from "react"
 import Axios from "axios"
 import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
+import { useNavigate } from "react-router-dom"
 
 function Login() {
+  const navigate = useNavigate()
+
   const appDispatch = useContext(DispatchContext)
   const appState = useContext(StateContext)
 
@@ -17,7 +20,8 @@ function Login() {
       if (response.data) {
         console.log(response.data)
         appDispatch({ type: "login", data: response.data })
-        appDispatch({ type: "flashMessage", value: "با موفقیت وارد شدید." })
+        appDispatch({ type: "flashMessage", value: "با موفقیت وارد شدید" })
+        navigate("/professors")
       } else {
         console.log("Incorrect stuNumber / password.")
       }
@@ -37,8 +41,7 @@ function Login() {
         appDispatch({ type: "login", data: response.data })
         document.cookie = `access_token=${response.data.token}`
         appDispatch({ type: "flashMessage", value: "با موفقیت وارد شدید." })
-
-        console.log(appState.isProfessor)
+        navigate(`/profile/${appState.user.id}`)
       } else {
         console.log("Incorrect username / password.")
       }

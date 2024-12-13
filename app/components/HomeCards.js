@@ -11,10 +11,10 @@ function HomeCards(props) {
   const navigateTwo = useNavigate()
 
   function sendMessage(card) {
-    // if (!appState.isProfessor) {
-    //   appDispatch({ type: "flashMessage", value: "دانشجو محترم ابتدا وارد حساب کاربری خود شوید" })
-    //   return
-    // }
+    if (!appState.loggedIn) {
+      appDispatch({ type: "flashMessage", value: "دانشجو محترم ابتدا وارد حساب کاربری خود شوید" })
+      return
+    }
     appDispatch({ type: "showChatroom" })
     navigateOne(`/profile/${appState.user.id}/messages`, {
       state: {
