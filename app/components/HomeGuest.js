@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import Axios from "axios"
 import Page from "./Page"
 import DispatchContext from "../DispatchContext"
+import { useNavigate } from "react-router-dom"
 
 function HomeGuest() {
   const [name, setName] = useState()
@@ -10,6 +11,8 @@ function HomeGuest() {
   const [password, setPassword] = useState()
 
   const appDispatch = useContext(DispatchContext)
+
+  const navigate = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()

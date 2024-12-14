@@ -2,12 +2,15 @@ import React, { useContext, useEffect, useState } from "react"
 import Page from "./Page"
 import Axios from "axios"
 import DispatchContext from "../DispatchContext"
+import { useNavigate } from "react-router-dom"
 
 function RegisterTeacher() {
   const groups = ["آمار", "اخلاق", "اقتصاد اسلامي", "تربيت  بدني", "حسابداري", "حقوق  جزا و جرم  شناسي", "حقوق  خصوصي", "حقوق بين الملل", "حقوق عمومي", "حقوق مالكيت فكري", "رياضي", "زبان  و ادبيات  انگليسي", "زبان  و ادبيات  عربي", "زبان  و ادبيات  فارسي", "زيست شناسي", "شيعه شناسي", "شيمي", "علم اطلاعات و دانش شناسي", "علوم  تربيتي", "علوم قرآن و حديث", "علوم كامپيوتر", "فقه  و مباني  حقوق  اسلامي", "فلسفه  و كلام  اسلامي", "فيزيك", "مديريت بازرگاني", "مديريت صنعتي", "معارف", "معماري", "مهندسي  صنايع", "مهندسي برق", "مهندسي شيمي", "مهندسي عمران", "مهندسي كامپيوتر", "مهندسي مكانيك"]
   const ranks = ["استاد تمام", "دانشيار", "استادیار", "مربی"]
 
   const appDispatch = useContext(DispatchContext)
+
+  const navigate = useNavigate()
 
   const [name, setName] = useState()
   const [username, setUsername] = useState()

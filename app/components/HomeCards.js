@@ -41,9 +41,8 @@ function HomeCards(props) {
 
   return (
     <>
-      <div className="row direction home">
+      <div className="row direction home-card">
         {props.cards.map(card => {
-          console.log(card)
           return (
             <>
               <div key={card._id} className="col-lg-4 col-md-6">

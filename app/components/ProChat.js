@@ -73,8 +73,10 @@ function ProChat() {
                   </button>
                 </td>
                 {appState.isProfessor ? <td>{conversation.studentId.name}</td> : <td>{conversation.professorId.name}</td>}
+                {/* {appState.isProfessor ? <td>{"سمیه اقبالیون"}</td> : <td>{conversation.professorId.name}</td>} */}
 
                 {appState.isProfessor ? <td>{conversation.studentId.studentNumber}</td> : ""}
+                {/* {appState.isProfessor ? <td>{"40113200005"}</td> : ""} */}
 
                 <td>{conversation.messages.length}</td>
                 <td>

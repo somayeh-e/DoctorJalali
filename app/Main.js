@@ -35,8 +35,8 @@ function Main() {
     },
     isCreateProgramOpen: false,
     isShowChatroom: false,
-    schedules: [],
-    isProfessor: true
+    schedules: []
+    // isProfessor: false
   }
 
   function ourReducer(draft, action) {

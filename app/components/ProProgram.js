@@ -3,7 +3,6 @@ import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"
 import Axios from "axios"
 import CreateProgram from "./CreateProgram"
-import Test from "./Test"
 
 function ProProgram(props) {
   const times = ["8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"]
@@ -12,7 +11,7 @@ function ProProgram(props) {
   const defaultTasks = ["حضور در جلسات", "عدم حضور", "راهنمایی پایان نامه", "فعالیت اجرایی", "سایر"]
 
   const [academicYear, setAcademicYear] = useState("1403")
-  const [term, setTerm] = useState("تابستان")
+  const [term, setTerm] = useState("0")
   const [editedSchedule, setEditedSchedule] = useState(null)
   const [showSubmit, setShowSubmit] = useState(true)
 
@@ -22,15 +21,14 @@ function ProProgram(props) {
   useEffect(() => {
     async function getLatestSchedule() {
       try {
-        // const res = await Axios.get(`/schedule/latest/${appState.user.id}`)
-        const res = await Axios.get("/schedule/latest/6691aaf27cbe05c1bf288d18")
+        const res = await Axios.get(`/schedule/latest/${appState.user.id}`)
         if (res.status === 200) {
           const data = res.data[0]
           console.log(data)
           const apiSchedules = data.days
           convertApiFormatToReact(apiSchedules)
           setTerm(data.term)
-          console.log(data.term)
+          // console.log(data.term)
           setAcademicYear(data.academicYear)
           setShowSubmit(false)
         } else {
@@ -38,6 +36,7 @@ function ProProgram(props) {
         }
       } catch (err) {
         appDispatch({ type: "flashMessage", value: "مشکل در اتصال" })
+        console.log(err)
       }
     }
     getLatestSchedule()
@@ -51,14 +50,16 @@ function ProProgram(props) {
           day: daySchedule.day,
           startTime: timeSlot.startTime,
           endTime: timeSlot.endTime,
-          defaultTask: timeSlot.task,
-          duration: timeSlot.duration - 1
+          task: timeSlot.task,
+          duration: timeSlot.duration
+          // duration: timeSlot.duration - 1
         })
       })
     })
-    appState.schedules = schedulesApi
-    console.log(schedulesApi)
-    appDispatch({ type: "addSchedule", value: appState.schedules })
+    // appState.schedules = schedulesApi
+    // console.log(schedulesApi)
+    // appDispatch({ type: "addSchedule", value: appState.schedules })
+    appDispatch({ type: "updateSchedule", value: schedulesApi })
   }
 
   const durationTotal = () => {
@@ -128,14 +129,26 @@ function ProProgram(props) {
     const infoSchedule = convertToApiFormat()
     console.log(infoSchedule)
     try {
-      const response = await Axios.post("/professor/create-schedule", infoSchedule)
-      if (response.status === 201) {
-        appDispatch({ type: "flashMessage", value: "برنامه با موفقیت ارسال شد" })
+      if (showSubmit) {
+        const response = await Axios.post("/professor/create-schedule", infoSchedule, {
+          withCredentials: true
+        })
+        if (response.status === 201) {
+          appDispatch({ type: "flashMessage", value: "برنامه با موفقیت ارسال شد" })
+        } else {
+          appDispatch({ type: "flashMessage", value: response.data.message })
+        }
       } else {
-        appDispatch({ type: "flashMessage", value: response.data.message + "خطا در ارسال" })
+        const id = await getIdSchedule(appState.user.id, term, academicYear)
+        var response = await Axios.put(`/professor/update-schedule/${id}`, infoSchedule, { withCredentials: true })
+        if (response.status == 200) {
+          appDispatch({ type: "flashMessage", value: "با موفقیت تغییرات اعمال شد" })
+        } else {
+          appDispatch({ type: "flashMessage", value: "دوباره امتحان کنید" })
+        }
       }
     } catch (err) {
-      appDispatch({ type: "flashMessage", value: err.response.data.message + "خطا در ارسال به سرور" })
+      appDispatch({ type: "flashMessage", value: "خطا در ارسال یه سرور" })
     }
   }
 
@@ -151,12 +164,12 @@ function ProProgram(props) {
           convertApiFormatToReact(apiSchedules)
           setShowSubmit(false)
         } else {
-          if (show) {
+          if (props.show) {
             appDispatch({ type: "flashMessage", value: "جدولی یافت نشد " })
           } else {
-            appDispatch({ type: "flashMessage", value: "جدولی یافت نشد " })
+            appDispatch({ type: "flashMessage", value: "در این سال تحصیلی یا ترم جدولی نداریم اضافه کنید" })
           }
-          appState.schedules = []
+          appDispatch({ type: "updateSchedule", value: [] })
           setShowSubmit(true)
         }
       } catch (err) {
@@ -172,12 +185,19 @@ function ProProgram(props) {
     async function fetchDataToApi() {
       try {
         const idSchedule = await getIdSchedule(appState.user.id, value, academicYear)
-        console.log(idSchedule)
         if (idSchedule) {
           let res = await Axios.get(`/schedule/${idSchedule}`)
           let apiSchedules = res.data.days
           convertApiFormatToReact(apiSchedules)
           setShowSubmit(false)
+        } else {
+          if (props.show) {
+            appDispatch({ type: "flashMessage", value: "جدولی یافت نشد " })
+          } else {
+            appDispatch({ type: "flashMessage", value: "در این سال تحصیلی یا ترم جدولی نداریم اضافه کنید" })
+          }
+          appDispatch({ type: "updateSchedule", value: [] })
+          setShowSubmit(true)
         }
       } catch (err) {
         // console.log("error")
@@ -245,19 +265,6 @@ function ProProgram(props) {
     appDispatch({ type: "closeCreateProgram" })
   }
 
-  // function deleteScheduleEntry() {
-  //   if (editedSchedule) {
-  //     const index = appState.schedules.findIndex(entry => entry.day === editedSchedule.day && entry.startTime === editedSchedule.startTime)
-  //     alert(index)
-  //     if (index !== -1) {
-  //       console.log(appState.schedules)
-  //       appState.schedules.splice(index, 1)
-  //       alert(appState.schedules)
-  //     }
-  //     appDispatch({ type: "closeCreateProgram" })
-  //   }
-  // }
-
   function deleteScheduleEntry() {
     if (editedSchedule) {
       const newSchedules = appState.schedules.filter(entry => !(entry.day === editedSchedule.day && entry.startTime === editedSchedule.startTime))
@@ -269,6 +276,7 @@ function ProProgram(props) {
   }
 
   function getCookie(name) {
+    console.log(name)
     const value = `; ${document.cookie}`
     const parts = value.split(`; ${name}=`)
     if (parts.length === 2) return parts.pop().split(";").shift()
@@ -359,7 +367,7 @@ function ProProgram(props) {
                             backgroundColor: isStartCell ? "#e0dfdf" : "transparent"
                           }}
                         >
-                          {getTask(day, time)}
+                          <p style={{ color: "#007bff" }}>{getTask(day, time)}</p>
                           <p>{getTime(day, time)}</p>
                         </td>
                       )

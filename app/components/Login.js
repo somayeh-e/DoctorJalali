@@ -11,12 +11,12 @@ function Login() {
   const appState = useContext(StateContext)
 
   const [username, setUsername] = useState()
-  const [stuNumber, setStuNumber] = useState()
+  const [studentNumber, setStudentNumber] = useState()
   const [password, setPassword] = useState()
 
   async function handleLoginStudent() {
     try {
-      const response = await Axios.post("/s/login", { stuNumber, password })
+      const response = await Axios.post("/s/login", { studentNumber, password })
       if (response.data) {
         console.log(response.data)
         appDispatch({ type: "login", data: response.data })
@@ -40,7 +40,8 @@ function Login() {
         console.log(response.data)
         appDispatch({ type: "login", data: response.data })
         document.cookie = `access_token=${response.data.token}`
-        appDispatch({ type: "flashMessage", value: "با موفقیت وارد شدید." })
+        appDispatch({ type: "isProfessor" })
+        appDispatch({ type: "flashMessage", value: "با موفقیت وارد شدید" })
         navigate(`/profile/${appState.user.id}`)
       } else {
         console.log("Incorrect username / password.")
@@ -72,7 +73,7 @@ function Login() {
             <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
               <div className="form px-4">
                 {" "}
-                <input onChange={e => setStuNumber(e.target.value)} type="text" name="" className="form-control" placeholder="شماره دانشجویی" />
+                <input onChange={e => setStudentNumber(e.target.value)} type="text" name="" className="form-control" placeholder="شماره دانشجویی" />
                 <input onChange={e => setPassword(e.target.value)} type="text" name="" className="form-control" placeholder="رمز ورود" />
                 <button onClick={handleLoginStudent} className="btn btn-dark btn-block">
                   ورود
